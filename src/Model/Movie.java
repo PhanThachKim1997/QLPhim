@@ -1,5 +1,7 @@
 package Model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,10 +9,10 @@ public class Movie {
     String nameMovie;
     int yearProduced;
     int priceTicket;
-    String date;
+    LocalDate date;
     Production production;
 
-    public Movie(String nameMovie, int yearProduced, int priceTicket, String date, Production production) {
+    public Movie(String nameMovie, int yearProduced, int priceTicket, LocalDate date, Production production) {
         this.nameMovie = nameMovie;
         this.yearProduced = yearProduced;
         this.priceTicket = priceTicket;
@@ -42,11 +44,11 @@ public class Movie {
         this.priceTicket = priceTicket;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -73,10 +75,10 @@ public class Movie {
 
     @Override
     public String toString() {
-        return  "Tên Phim" + nameMovie+
-                "\nNăm sản xuất" + yearProduced +
-                "\nGiá vé=" + priceTicket +
-                "\nNgày chiếu: " + date +
+        return  "Tên Phim: " + nameMovie+
+                "\nNăm sản xuất: " + yearProduced +
+                "\nGiá vé = " + priceTicket +
+                "\nNgày chiếu: " + date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) +
                 "\nNhà sản xuất: " + production.nameProd;
     }
 }

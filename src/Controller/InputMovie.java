@@ -5,6 +5,10 @@ import Model.Production;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -20,18 +24,17 @@ public class InputMovie {
         int priceTicket = Integer.parseInt(sc.nextLine());
 
         //Nhập ngày công chiếu
-        Date saveDate = new Date();
-        System.out.println("Nhập vào công chiếu (dd/MM/yyyy): ");
-        String releaseDate;
-        while(true) {
+        LocalDate releaseDate;
+        //Tùy chỉnh dạng format ngày tháng
+        DateTimeFormatter format_gach = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        while (true){
             try {
+                System.out.println("Nhập vào công chiếu (dd-MM-yyyy): ");
                 String inputDate = sc.nextLine();
-                SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-                saveDate = formatDate.parse(inputDate);
-                releaseDate = formatDate.format(saveDate);
-                break;
-            } catch (ParseException e) {
-                System.out.println("Định dạng không đúng. Nhập lại: ");
+                releaseDate = LocalDate.parse(inputDate,format_gach);
+                    break;
+            }catch (DateTimeParseException e){
+                System.out.print("Ngày tháng không hợp lệ. Nhập lại: ");
             }
         }
 
